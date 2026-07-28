@@ -1,1 +1,26 @@
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#111;
+    color:#fff;
+}
 
+header{
+    background:#000;
+    border-bottom:2px solid gold;
+    padding:20px;
+    text-align:center;
+}
+
+h1{
+    color:gold;
+}
+
+.btn{
+    background:gold;
+    color:black;
+    padding:12px 24px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
