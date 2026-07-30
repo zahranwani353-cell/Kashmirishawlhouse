@@ -107,3 +107,6 @@ font-size:18px;
 nav a:hover{
 color:gold;
 }
+html{
+scroll-behavior:smooth;
+}
