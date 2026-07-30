@@ -110,3 +110,15 @@ color:gold;
 html{
 scroll-behavior:smooth;
 }
+footer{
+background:black;
+padding:30px;
+text-align:center;
+border-top:2px solid gold;
+margin-top:40px;
+}
+
+footer p{
+margin:5px 0;
+color:white;
+}
