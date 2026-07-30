@@ -46,6 +46,20 @@ margin-bottom:20px;
 font-size:18px;
 line-height:1.8;
 }
+.contact{
+padding:60px 20px;
+text-align:center;
+}
+
+.contact h2{
+color:gold;
+margin-bottom:20px;
+}
+
+.contact p{
+font-size:18px;
+margin:10px 0;
+}
 
 .founder p{
 font-size:18px;
