@@ -127,6 +127,7 @@ text-decoration:none;
 margin:0;
 font-weight:bold;
 font-size:16px;
+white-space:nowrap;    
 }
 
 nav a:hover{
