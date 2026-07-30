@@ -115,12 +115,16 @@ border-radius:12px;
 }
 nav{
 margin-top:15px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
 }
 
 nav a{
 color:white;
 text-decoration:none;
-margin:0 15px;
+margin:0;
 font-weight:bold;
 font-size:18px;
 }
