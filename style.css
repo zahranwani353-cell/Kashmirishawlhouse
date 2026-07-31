@@ -41,13 +41,24 @@ h1{
 }
 
 .btn{
-    background:gold;
-    color:black;
-    padding:12px 24px;
-    border-radius:8px;
+    background:#D4AF37;
+    color:#111;
+    padding:14px 28px;
+    border-radius:30px;
     text-decoration:none;
     font-weight:bold;
+    display:inline-block;
+    margin-top:20px;
+    transition:0.3s ease;
+    box-shadow:0 4px 15px rgba(212,175,55,0.25);
 }
+
+.btn:hover{
+    transform:translateY(-3px);
+    background:#E5C158;
+    box-shadow:0 8px 25px rgba(212,175,55,0.4);
+}
+
 
 .founder{
 padding:60px 20px;
