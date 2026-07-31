@@ -244,3 +244,27 @@ h2{
     background:#D4AF37;
     margin:12px auto 0;
 }
+.founder{
+    text-align:center;
+    max-width:900px;
+    margin:60px auto;
+    padding:40px 20px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(212,175,55,0.15);
+    border-radius:20px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.3);
+}
+
+.founder img{
+    width:220px;
+    border-radius:20px;
+    margin:20px 0;
+    box-shadow:0 8px 25px rgba(0,0,0,0.35);
+}
+
+.founder p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    color:#ddd;
+}
