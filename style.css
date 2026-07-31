@@ -294,3 +294,17 @@ h2{
     html{
     scroll-behavior:smooth;
 }
+    html{
+    scroll-behavior:smooth;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 18px;
+    border:1px solid #D4AF37;
+    color:#D4AF37;
+    border-radius:30px;
+    margin-bottom:20px;
+    font-size:12px;
+    letter-spacing:2px;
+}
