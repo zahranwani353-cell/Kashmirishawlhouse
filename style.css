@@ -94,7 +94,7 @@ display:flex;
 flex-wrap:wrap;
 justify-content:space-between;
 gap:10px;
-    padding:10px;
+padding:10px;
 }
 
 .gallery img{
@@ -104,6 +104,8 @@ object-fit:cover;
 border-radius:16px;
 transition:0.4s;
 box-shadow:0 4px 15px rgba(0,0,0,0.25);
+}
+
 .gallery img:hover{
 transform:scale(1.04);
 }
@@ -111,13 +113,14 @@ transform:scale(1.04);
 .shop-gallery{
 display:flex;
 flex-wrap:wrap;
-justify-content:center;
-gap:15px;
+justify-content:space-between;
+gap:10px;
+padding:10px;
 }
 
 .shop-gallery img{
-width:300px;
-height:220px;
+width:48%;
+height:180px;
 object-fit:cover;
 border-radius:12px;
 }
