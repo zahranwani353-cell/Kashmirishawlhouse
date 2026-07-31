@@ -1,7 +1,7 @@
 body{
     margin:0;
     font-family:Arial,sans-serif;
-    background:#111;
+    background:linear-gradient(to bottom,#0f0f0f,#1a1a1a,#111);
     color:#fff;
 }
 
@@ -180,4 +180,11 @@ header h1{
 header p{
     font-size:14px;
     color:#ccc;
+}
+section{
+    padding:60px 20px;
+}
+h2{
+    color:#D4AF37;
+    letter-spacing:1px;
 }
