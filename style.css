@@ -291,4 +291,6 @@ h2{
     color:#D4AF37;
     text-decoration:none;
     font-weight:bold;
+    html{
+    scroll-behavior:smooth;
 }
