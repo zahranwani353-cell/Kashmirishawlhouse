@@ -226,3 +226,21 @@ h2{
         transform:translateY(0);
     }
 }
+.section-title{
+    text-align:center;
+    font-size:32px;
+    color:#D4AF37;
+    margin-bottom:30px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    position:relative;
+}
+
+.section-title::after{
+    content:"";
+    display:block;
+    width:80px;
+    height:2px;
+    background:#D4AF37;
+    margin:12px auto 0;
+}
