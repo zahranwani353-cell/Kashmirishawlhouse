@@ -21,7 +21,7 @@ background-position:center;
 }
 
 .hero h2{
-font-size:26px;
+font-size:22px;
 color:gold;
 margin-bottom:10px;
     letter-spacing:1px;
@@ -30,7 +30,7 @@ margin-bottom:10px;
 
 .hero p{
 font-size:13px;
-max-width:300px;
+max-width:280px;
 margin:auto;
     margin-top:10px;
 line-height:1.5;
