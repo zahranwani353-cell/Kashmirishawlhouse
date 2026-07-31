@@ -161,3 +161,12 @@ font-weight:bold;
 z-index:9999;
 box-shadow:0 4px 10px rgba(0,0,0,0.3);
 }
+header h1{
+    font-size:28px;
+    margin:8px 0;
+}
+
+header p{
+    font-size:14px;
+    color:#ccc;
+}
