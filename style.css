@@ -92,15 +92,20 @@ line-height:1.8;
 .gallery{
 display:flex;
 flex-wrap:wrap;
-justify-content:center;
-gap:15px;
+justify-content:space-between;
+gap:10px;
+    padding:10px;
 }
 
 .gallery img{
-width:300px;
-height:350px;
+width:48%;
+height:220px;
 object-fit:cover;
-border-radius:12px;
+border-radius:16px;
+transition:0.4s;
+box-shadow:0 4px 15px rgba(0,0,0,0.25);
+.gallery img:hover{
+transform:scale(1.04);
 }
 
 .shop-gallery{
