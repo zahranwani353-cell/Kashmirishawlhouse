@@ -12,7 +12,7 @@ header{
     text-align:center;
 }
 .hero{
-padding:80px 20px;
+padding:50px 20px;
 text-align:center;
 background:linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
 url("hero1.jpg");
@@ -21,19 +21,19 @@ background-position:center;
 }
 
 .hero h2{
-font-size:28px;
+font-size:26px;
 color:gold;
-margin-bottom:12px;
-    letter-spacing:2px;
+margin-bottom:10px;
+    letter-spacing:1px;
     text-transform:uppercase;
 }
 
 .hero p{
-font-size:14px;
-max-width:320px;
+font-size:13px;
+max-width:300px;
 margin:auto;
     margin-top:10px;
-line-height:1.6;
+line-height:1.5;
 }
 
 h1{
