@@ -268,3 +268,27 @@ h2{
     line-height:1.8;
     color:#ddd;
 }
+.footer{
+    text-align:center;
+    padding:50px 20px;
+    background:#0a0a0a;
+    border-top:1px solid rgba(212,175,55,0.2);
+    margin-top:60px;
+}
+
+.footer h3{
+    color:#D4AF37;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+.footer p{
+    color:#bbb;
+    margin:8px 0;
+}
+
+.footer a{
+    color:#D4AF37;
+    text-decoration:none;
+    font-weight:bold;
+}
