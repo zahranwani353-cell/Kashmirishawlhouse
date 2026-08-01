@@ -277,10 +277,10 @@ h2{
 }
 .footer{
     text-align:center;
-    padding:50px 20px;
+    padding:30px 20px;
     background:#0a0a0a;
-    border-top:1px solid rgba(212,175,55,0.2);
-    margin-top:60px;
+    border-top:2px solid gold;
+    margin-top:20px;
 }
 
 .footer h3{
@@ -298,10 +298,13 @@ h2{
     color:#D4AF37;
     text-decoration:none;
     font-weight:bold;
-    html{
-    scroll-behavior:smooth;
 }
-    html{
+
+.footer a:hover{
+    color:white;
+}
+
+html{
     scroll-behavior:smooth;
 }
 
