@@ -21,10 +21,10 @@ background-position:center;
 }
 
 .hero h2{
-font-size:28px;
+font-size:20px;
 color:gold;
-line-height:1.2;
-letter-spacing:1px;
+line-height:1;
+letter-spacing:0.5px;
 text-transform:uppercase;
 }
 
