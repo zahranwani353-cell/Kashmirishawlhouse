@@ -383,7 +383,7 @@ h2{
 
 .review-btn{
     color:#D4AF37;
-    font-size:18px;
+    font-size:16px;
     font-weight:bold;
     text-decoration:none;
     border-bottom:1px solid #D4AF37;
@@ -405,6 +405,8 @@ h2{
     text-decoration:none;
     font-weight:bold;
     font-size:16px;
+    text-transform:uppercase;
+    letter-spacing:1px;
     margin-top:20px;
     transition:0.3s ease;
 }
