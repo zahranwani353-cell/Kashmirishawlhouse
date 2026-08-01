@@ -342,3 +342,40 @@ h2{
         background-size:110%;
     }
 }
+
+.footer{
+    background:#0a0a0a;
+    color:#ddd;
+    padding:50px 25px;
+    text-align:center;
+}
+
+.footer h3{
+    color:#D4AF37;
+    font-size:22px;
+    margin:25px 0 15px;
+}
+
+.footer p{
+    max-width:700px;
+    margin:10px auto;
+    line-height:1.8;
+    font-size:16px;
+    color:#bbb;
+}
+
+.footer a{
+    color:#D4AF37;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.footer a:hover{
+    color:white;
+}
+
+.copyright{
+    margin-top:35px;
+    font-size:14px;
+    color:#777;
+}
