@@ -441,3 +441,9 @@ h2{
     margin-top:15px;
     color:white;
 }
+
+.reviews{
+    background:#000;
+    padding:40px 20px;
+    text-align:center;
+}
