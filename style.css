@@ -264,22 +264,23 @@ h2{
 }
 
 .founder p{
-    max-width:700px;
-    margin:auto;
-    line-height:1.8;
-    color:#ddd;
+    max-width:500px;
+    margin:20px auto;
+    line-height:1.9;
+    font-size:16px;
+    color:#bbb;
 }
 
 .footer{
     text-align:center;
-    padding:30px 20px;
+    padding:60px 25px;
     background:#0a0a0a;
     margin-top:0px;
 }
 
 .footer h3{
     color:#D4AF37;
-    margin-bottom:10px;
+    margin-bottom:35px 0 20px;
     letter-spacing:1px;
 }
 
