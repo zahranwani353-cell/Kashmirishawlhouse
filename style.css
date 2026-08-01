@@ -87,6 +87,7 @@ margin-bottom:20px;
 font-size:18px;
 line-height:1.8;
 }
+
 .contact{
 padding:60px 20px;
 text-align:center;
@@ -171,6 +172,7 @@ background:rgba(212,175,55,0.08);
 html{
 scroll-behavior:smooth;
 }
+
 footer{
 background:black;
 padding:30px;
@@ -275,6 +277,7 @@ h2{
     line-height:1.8;
     color:#ddd;
 }
+
 .footer{
     text-align:center;
     padding:30px 20px;
