@@ -18,6 +18,18 @@ background:linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
 url("hero1.jpg");
 background-size:cover;
 background-position:center;
+animation: heroFade 1.5s ease;
+}
+
+@keyframes heroFade{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 .hero h2{
@@ -455,4 +467,14 @@ h2{
     color:#D4AF37;
     margin-bottom:30px;
     letter-spacing:1px;
+}
+@keyframes heroFade{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
