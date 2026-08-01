@@ -56,13 +56,13 @@ h1{
     display:inline-block;
     margin-top:20px;
     transition:0.3s ease;
-    box-shadow:0 4px 15px rgba(212,175,55,0.25);
+    box-shadow:0 0 20px rgba(255,215,0,0.25);
 }
 
 .btn:hover{
     transform:translateY(-3px);
     background:#E5C158;
-    box-shadow:0 8px 25px rgba(212,175,55,0.4);
+    box-shadow:0 0 30px rgba(255,215,0,0.45);
 }
 
 
@@ -317,4 +317,22 @@ html{
     margin-bottom:20px;
     font-size:12px;
     letter-spacing:2px;
+}
+
+h2{
+    text-shadow:0 0 10px rgba(255,215,0,0.4);
+    letter-spacing:1px;
+}
+
+.hero{
+    animation:heroZoom 12s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom{
+    from{
+        background-size:100%;
+    }
+    to{
+        background-size:110%;
+    }
 }
