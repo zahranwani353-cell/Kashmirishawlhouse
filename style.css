@@ -380,3 +380,18 @@ h2{
     font-size:14px;
     color:#777;
 }
+
+.review-btn{
+    color:#D4AF37;
+    font-size:18px;
+    font-weight:bold;
+    text-decoration:none;
+    border-bottom:1px solid #D4AF37;
+    padding-bottom:5px;
+    transition:0.3s;
+}
+
+.review-btn:hover{
+    color:white;
+    border-color:white;
+}
