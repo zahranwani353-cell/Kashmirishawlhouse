@@ -449,3 +449,10 @@ h2{
     padding:40px 20px;
     text-align:center;
 }
+
+.collection-text{
+    text-align:center;
+    color:#D4AF37;
+    margin-bottom:30px;
+    letter-spacing:1px;
+}
