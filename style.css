@@ -413,3 +413,31 @@ h2{
     background:#D4AF37;
     color:black;
 }
+
+.review-card{
+    background:#111;
+    border:1px solid rgba(212,175,55,0.3);
+    border-radius:15px;
+    padding:25px;
+    max-width:500px;
+    margin:25px auto;
+    text-align:center;
+}
+
+.review-card h3{
+    color:#D4AF37;
+    letter-spacing:3px;
+    margin-bottom:15px;
+}
+
+.review-card p{
+    color:#ddd;
+    line-height:1.7;
+    font-size:16px;
+}
+
+.review-card strong{
+    display:block;
+    margin-top:15px;
+    color:white;
+}
