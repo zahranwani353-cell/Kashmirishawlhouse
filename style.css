@@ -567,3 +567,23 @@ font-size:18px;
 margin-bottom:40px;
 text-align:center;
 }
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+padding:20px;
+background:#f7f7f7;
+}
+
+.gallery img{
+width:100%;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+transition:0.3s;
+cursor:pointer;
+}
+
+.gallery img:hover{
+transform:scale(1.03);
+}
