@@ -121,14 +121,14 @@ line-height:1.8;
 
 .gallery{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:repeat(2,1fr);
 gap:10px;
 padding:10px;
 }
 
 .gallery img{
-width:48%;
-height:300px;
+width:100%;
+aspect-ratio:3/4;
 object-fit:cover;
 border-radius:20px;
 display:block;
@@ -153,6 +153,7 @@ height:180px;
 object-fit:cover;
 border-radius:12px;
 }
+
 nav{
 margin-top:15px;
 display:flex;
@@ -200,6 +201,7 @@ font-weight:bold;
 z-index:9999;
 box-shadow:0 4px 10px rgba(0,0,0,0.3);
 }
+
 header h1{
     font-size:28px;
     margin:8px 0;
@@ -209,13 +211,17 @@ header p{
     font-size:14px;
     color:#ccc;
 }
+
 section{
     padding:60px 20px;
+    
 }
+
 h2{
     color:#D4AF37;
     letter-spacing:1px;
 }
+
 .gallery img,
 .shop-gallery img{
     opacity:0;
@@ -238,7 +244,7 @@ h2{
 
 .section-title{
     text-align:center;
-    font-size:32px;
+    font-size:26px;
     color:#D4AF37;
     margin-bottom:30px;
     letter-spacing:2px;
