@@ -128,13 +128,10 @@ padding:10px;
 
 .gallery img{
 width:48%;
-min-width:48%;
-height:320px;
+height:300px;
 object-fit:cover;
 border-radius:20px;
-transition:0.4s;
-box-shadow:0 8px 25px rgba(0,0,0,0.35);
-    border:1px solid rgba(212,175,55,0.15);
+display:block;
 }
 
 .gallery img:hover{
