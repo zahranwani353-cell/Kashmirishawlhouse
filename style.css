@@ -523,3 +523,21 @@ color:black;
 font-weight:bold;
 text-decoration:none;
 }
+
+.gallery{
+background:white;
+padding:80px 20px;
+}
+
+.gallery .section-title{
+color:black;
+font-size:48px;
+margin-bottom:10px;
+}
+
+.gallery-subtitle{
+color:#666;
+font-size:18px;
+margin-bottom:40px;
+text-align:center;
+}
