@@ -270,7 +270,10 @@ h2{
 
 .founder img{
     width:220px;
-    border-radius:20px;
+    height:220px;
+    object-fit:cover;
+    border-radius:50%;
+    border:3px solid #D4AF37;
     margin:20px 0;
     box-shadow:0 8px 25px rgba(0,0,0,0.35);
 }
