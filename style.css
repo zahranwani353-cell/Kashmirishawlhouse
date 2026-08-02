@@ -128,7 +128,8 @@ padding:10px;
 
 .gallery img{
 width:48%;
-height:220px;
+min-width:48%;
+height:320px;
 object-fit:cover;
 border-radius:20px;
 transition:0.4s;
