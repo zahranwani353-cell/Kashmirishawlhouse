@@ -614,7 +614,7 @@ text-align:center;
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:20px;
-padding:40px 10px;
+padding:80px 20px;
 background:#111111;
 }
 
