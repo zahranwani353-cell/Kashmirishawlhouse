@@ -674,3 +674,17 @@ font-weight:bold;
     transform:translateY(-3px);
     box-shadow:0 8px 20px rgba(212,175,55,0.35);
 }
+
+.lux-header nav{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+gap:15px;
+width:100%;
+}
+
+.lux-header nav a{
+font-size:12px;
+padding:5px 0;
+}
