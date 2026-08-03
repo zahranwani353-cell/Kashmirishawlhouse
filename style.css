@@ -710,3 +710,33 @@ font-size:12px;
 letter-spacing:0.5px;
 }
 
+.hero-buttons{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+margin-top:25px;
+}
+
+.btn{
+background:#D4AF37;
+color:#111;
+padding:14px 24px;
+border-radius:30px;
+text-decoration:none;
+font-size:13px;
+font-weight:600;
+letter-spacing:1px;
+margin-top:0;
+}
+
+.btn-outline{
+background:transparent;
+border:1px solid #D4AF37;
+color:#D4AF37;
+padding:14px 24px;
+border-radius:30px;
+text-decoration:none;
+font-size:13px;
+font-weight:600;
+letter-spacing:1px;
+}
