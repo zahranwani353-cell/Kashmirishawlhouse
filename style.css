@@ -128,9 +128,12 @@ padding:10px;
 
 .gallery img{
 width:100%;
-height:auto;
-display:block;
+height:auto !important;
+max-width:100%;
 border-radius:20px;
+display:block;
+object-fit:unset !important;
+aspect-ratio:auto !important;
 }
 
 .gallery img:hover{
