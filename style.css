@@ -567,7 +567,7 @@ text-decoration:none;
 }
 
 .gallery{
-background:white;
+background:#111111;
 padding:80px 20px;
 }
 
@@ -615,7 +615,7 @@ display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:20px;
 padding:20px;
-background:#f7f7f7;
+background:#111111;
 }
 
 .gallery img{
