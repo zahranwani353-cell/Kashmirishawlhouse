@@ -688,6 +688,11 @@ gap:15px;
 width:100%;
 }
 
+.lux-header nav a{
+font-size:12px;
+padding:5px 0;
+}
+
 .hero-features{
 display:flex;
 flex-wrap:wrap;
@@ -705,7 +710,3 @@ font-size:12px;
 letter-spacing:0.5px;
 }
 
-.lux-header nav a{
-font-size:12px;
-padding:5px 0;
-}
