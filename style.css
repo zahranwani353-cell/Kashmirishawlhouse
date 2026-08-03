@@ -120,25 +120,19 @@ line-height:1.8;
 }
 
 .gallery{
-    column-count: 2;
-    column-gap: 12px;
-    padding: 10px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+padding:10px;
 }
 
 .gallery img{
-    width: 100%;
-    height: auto;
-    margin-bottom: 12px;
-    border-radius: 20px;
-    display: block;
-    break-inside: avoid;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-@media (max-width: 768px){
-    .gallery{
-        column-count: 2;
-    }
+width:100%;
+height:280px;
+object-fit:cover;
+border-radius:20px;
+display:block;
+box-shadow:0 8px 25px rgba(0,0,0,0.15);
 }
 
 .gallery img:hover{
