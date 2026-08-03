@@ -5,12 +5,38 @@ body{
     color:#fff;
 }
 
-header{
-    background:#000;
-    border-bottom:1px solid gold;
-    padding:8px 15px;
-    text-align:center;
+.lux-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 20px;
+background:#0b0b0b;
 }
+
+.brand{
+color:white;
+font-size:18px;
+letter-spacing:4px;
+font-family:serif;
+}
+
+.lux-header nav{
+display:flex;
+gap:20px;
+}
+
+.lux-header nav a{
+color:#bdbdbd;
+text-decoration:none;
+font-size:11px;
+letter-spacing:1px;
+font-weight:500;
+}
+
+.lux-header nav a:hover{
+color:#D4AF37;
+}
+
 .hero{
 padding:80px 20px;
 text-align:left;
