@@ -740,3 +740,31 @@ font-size:13px;
 font-weight:600;
 letter-spacing:1px;
 }
+
+.hero-stats{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:20px;
+}
+
+.hero-stats div{
+background:#151515;
+border:1px solid #2b2b2b;
+padding:10px 14px;
+border-radius:30px;
+text-align:center;
+}
+
+.hero-stats h3{
+color:#D4AF37;
+font-size:16px;
+margin:0;
+}
+
+.hero-stats p{
+color:#fff;
+font-size:11px;
+margin:2px 0 0 0;
+line-height:1.2;
+}
