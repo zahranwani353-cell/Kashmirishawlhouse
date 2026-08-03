@@ -128,7 +128,7 @@ padding:10px;
 
 .gallery img{
 width:100%;
-aspect-ratio:3/4;
+height:260px;
 object-fit:cover;
 object-position:center;
 border-radius:20px;
