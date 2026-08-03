@@ -12,12 +12,9 @@ header{
     text-align:center;
 }
 .hero{
-padding:30px 15px;
-text-align:center;
-background:linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-url("hero1.jpg");
-background-size:cover;
-background-position:center;
+padding:80px 20px;
+text-align:left;
+background:#0b0b0b;
 animation: heroFade 1.5s ease;
 }
 
@@ -33,13 +30,13 @@ transform:translateY(0);
 }
 
 .hero h2{
-font-size:36px;
-color:gold;
-line-height:1.5;
-letter-spacing:1.5px;
-text-transform:uppercase;
-    animation: fadeUp 1.5s ease;
-opacity: 1;
+font-size:52px;
+line-height:1.05;
+font-weight:300;
+color:white;
+text-transform:none;
+letter-spacing:0;
+margin-bottom:20px;
 }
 
 .hero p{
