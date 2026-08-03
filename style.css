@@ -49,10 +49,13 @@ flex-wrap:wrap;
 }
 
 .hero{
-padding:80px 20px;
-text-align:left;
+padding:70px 25px;
 background:#0b0b0b;
-animation: heroFade 1.5s ease;
+text-align:left;
+display:flex;
+flex-direction:column;
+justify-content:center;
+min-height:75vh;
 }
 
 @keyframes heroFade{
@@ -67,22 +70,23 @@ transform:translateY(0);
 }
 
 .hero h2{
-font-size:52px;
-line-height:1.05;
+font-size:34px;
+line-height:1.15;
 font-weight:300;
 color:white;
-text-transform:none;
-letter-spacing:0;
 margin-bottom:20px;
 }
 
+.hero h2 span{
+color:#D4AF37;
+}
+
 .hero p{
-font-size:28px;
-max-width:none;
-margin:auto;
-    margin-top:0px;
-line-height:1.2;
-    font-weight:600;
+font-size:16px;
+line-height:1.8;
+color:#bdbdbd;
+max-width:600px;
+margin:0;
 }
 
 h1{
