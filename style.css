@@ -37,6 +37,17 @@ font-weight:500;
 color:#D4AF37;
 }
 
+.lux-header{
+flex-wrap:wrap;
+}
+
+.lux-header nav{
+width:100%;
+justify-content:center;
+margin-top:10px;
+flex-wrap:wrap;
+}
+
 .hero{
 padding:80px 20px;
 text-align:left;
