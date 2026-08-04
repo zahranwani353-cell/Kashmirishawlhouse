@@ -668,7 +668,7 @@ letter-spacing:1px;
 
 border:1px solid rgba(212,175,55,0.25);
 border-radius:25px;
-background:rgba(255,255,255,0.03)
+background:rgba(255,255,255,0.03);
 
 transition:all 0.3s ease;
 }
