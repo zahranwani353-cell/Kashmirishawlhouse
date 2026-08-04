@@ -15,6 +15,7 @@ font-family:serif;
 .hero{
 padding:70px 25px;
 background:#0b0b0b;
+position:relative;
 text-align:left;
 display:flex;
 flex-direction:column;
@@ -809,4 +810,20 @@ text-align:center;
 letter-spacing:2px;
 text-transform:uppercase;
 margin-bottom:10px;
+}
+
+.hero-instagram{
+position:absolute;
+right:15px;
+bottom:15px;
+z-index:10;
+}
+
+.hero-instagram img{
+width:32px;
+height:32px;
+border-radius:50%;
+background:white;
+padding:4px;
+box-shadow:0 0 10px rgba(212,175,55,0.35);
 }
