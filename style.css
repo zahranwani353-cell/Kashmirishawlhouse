@@ -722,7 +722,22 @@ width:100%;
 
 .lux-header nav a{
 font-size:12px;
-padding:5px 0;
+padding:8px 14px;
+color:#ffffff;
+text-decoration:none;
+font-weight:600;
+letter-spacing:1px;
+
+border:1px solid rgba(212,175,55,0.20);
+border-radius:20px;
+
+transition:all 0.3s ease;
+}
+
+.lux-header nav a:hover{
+background:rgba(212,175,55,0.15);
+color:#D4AF37;
+border-color:#D4AF37;
 }
 
 .hero-features{
