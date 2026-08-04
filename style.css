@@ -5,60 +5,11 @@ body{
     color:#fff;
 }
 
-.lux-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:25px 20px;
-background:#0b0b0b;
-
-position:sticky;
-top:0;
-z-index:1000;
-
-border-bottom:1px solid rgba(212,175,55,0.15);
-}
-
-
 .brand{
 color:white;
 font-size:18px;
 letter-spacing:4px;
 font-family:serif;
-}
-
-.lux-header nav{
-display:flex;
-gap:20px;
-}
-
-.lux-header nav a{
-color:#ffffff;
-text-decoration:none;
-font-size:12px;
-letter-spacing:1px;
-font-weight:600;
-
-padding:8px 14px;
-border-radius:20px;
-
-transition:0.3s ease;
-}
-
-.lux-header nav a:hover{
-background:rgba(212,175,55,0.15);
-color:#D4AF37;
-}
-
-.lux-header{
-flex-wrap:wrap;
-}
-
-.lux-header nav{
-width:100%;
-justify-content:center;
-margin-top:10px;
-flex-wrap:wrap;
 }
 
 .hero{
@@ -208,31 +159,6 @@ object-fit:cover;
 border-radius:12px;
 }
 
-nav{
-margin-top:15px;
-display:flex;
-justify-content:center;
-align-items:centre;
-gap:10px;
-}
-
-.lux-header nav a{
-color:#ffffff;
-text-decoration:none;
-font-size:12px;
-letter-spacing:1px;
-font-weight:600;
-
-padding:8px 14px;
-border-radius:20px;
-
-transition:0.3s ease;
-}
-
-nav a:hover{
-color:#D4AF37;
-background:rgba(212,175,55,0.15);
-}
 
 html{
 scroll-behavior:smooth;
@@ -721,15 +647,16 @@ width:100%;
 }
 
 .lux-header nav a{
-font-size:12px;
+font-size:13px;
 padding:8px 14px;
-color:#ffffff;
+color:#fff;
 text-decoration:none;
 font-weight:600;
 letter-spacing:1px;
 
-border:1px solid rgba(212,175,55,0.20);
-border-radius:20px;
+border:1px solid rgba(212,175,55,0.25);
+border-radius:25px;
+background:rgba(255,255,255,0.03)
 
 transition:all 0.3s ease;
 }
