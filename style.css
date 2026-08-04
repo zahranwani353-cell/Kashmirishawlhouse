@@ -311,6 +311,8 @@ html{
     margin-bottom:20px;
     font-size:12px;
     letter-spacing:2px;
+    position:relative;
+    top:15px;
 }
 
 h2{
