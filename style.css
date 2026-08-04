@@ -281,13 +281,12 @@ h2{
     }
 
 .section-title{
-    text-align:center;
-    font-size:26px;
-    color:#D4AF37;
-    margin-bottom:30px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    position:relative;
+text-align:center;
+font-size:38px;
+font-weight:300;
+color:#D4AF37;
+letter-spacing:2px;
+margin-bottom:10px;
 }
 
 .section-title::after{
@@ -578,7 +577,13 @@ margin-bottom:10px;
 }
 
 .gallery-subtitle{
-color:#666;
+text-align:center;
+color:#bdbdbd;
+font-size:15px;
+max-width:650px;
+margin:0 auto 35px auto;
+line-height:1.8;
+}
 
     .product-card{
 background:white;
