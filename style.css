@@ -637,6 +637,18 @@ font-weight:bold;
     box-shadow:0 8px 20px rgba(212,175,55,0.35);
 }
 
+.lux-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 20px;
+background:#0b0b0b;
+
+position:sticky;
+top:0;
+z-index:1000;
+}
+
 .lux-header nav{
 display:flex;
 justify-content:center;
