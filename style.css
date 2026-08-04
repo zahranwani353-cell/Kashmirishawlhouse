@@ -572,10 +572,10 @@ padding:80px 20px;
 
 .section-title{
 text-align:center;
-font-size:42px;
+font-size:30px;
 font-weight:300;
 color:#D4AF37;
-letter-spacing:3px;
+letter-spacing:1px;
 margin-bottom:12px;
 text-transform:uppercase;
 }
@@ -583,8 +583,8 @@ text-transform:uppercase;
 .gallery-subtitle{
 text-align:center;
 color:#c8c8c8;
-font-size:14px;
-max-width:650px;
+font-size:13px;
+max-width:90%px;
 margin:0 auto 35px auto;
 line-height:1.8;
 font-style:italic;
@@ -802,4 +802,8 @@ margin:0;
 color:white;
 font-size:12px;
 margin-top:5px;
+}
+
+body{
+overflow-x:hidden;
 }
