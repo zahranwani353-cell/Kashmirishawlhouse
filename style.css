@@ -802,9 +802,11 @@ box-shadow:0 10px 25px rgba(212,175,55,0.12);
 }
 
 .video-title{
-text-align:center;
-color:#D4AF37;
-font-size:16px;
-margin-bottom:15px;
+font-size:10px !important;
 font-weight:700;
+color:#D4AF37;
+text-align:center;
+letter-spacing:2px;
+text-transform:uppercase;
+margin-bottom:10px;
 }
