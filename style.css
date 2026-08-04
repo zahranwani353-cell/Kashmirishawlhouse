@@ -79,11 +79,11 @@ transform:translateY(0);
 
 .hero h2{
 font-size:28px;
-line-height:1.12;
+line-height:1.2;
 font-weight:600;
 color:#ffffff;
 text-align:left;
-max-width:400px;
+max-width:500px;
 margin-bottom:12px;
 letter-spacing:1px;
 }
