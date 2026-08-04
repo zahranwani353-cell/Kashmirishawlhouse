@@ -760,7 +760,6 @@ margin-top:20px;
 }
 
 .hero-stats div{
-background:#111111;
 border:1px solid #2b2b2b;
 padding:10px 14px;
 border-radius:30px;
@@ -785,7 +784,6 @@ display:flex;
 justify-content:center;
 gap:30px;
 padding:25px 15px;
-background:#111111;
 }
 
 .hero-stats div{
