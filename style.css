@@ -384,6 +384,7 @@ h2{
 
 .hero{
     animation:heroZoom 12s ease-in-out infinite alternate;
+    box-shadow:0 15px 35px rgba(212,175,55,0.08);
 }
 
 @keyframes heroZoom{
