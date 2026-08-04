@@ -641,13 +641,13 @@ font-weight:bold;
 display:flex;
 justify-content:center;
 align-items:center;
-flex-wrap:wrap;
+flex-wrap:nowrap;
 gap:10px;
 width:100%;
 }
 
 .lux-header nav a{
-font-size:13px;
+font-size:10px;
 padding:8px 10px;
 color:#fff;
 text-decoration:none;
