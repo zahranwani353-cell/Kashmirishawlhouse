@@ -216,21 +216,22 @@ align-items:centre;
 gap:10px;
 }
 
-nav a{
-color:white;
+.lux-header nav a{
+color:#ffffff;
 text-decoration:none;
-margin:0;
-font-weight:bold;
-font-size:16px;
-white-space:nowrap;
+font-size:12px;
+letter-spacing:1px;
+font-weight:600;
+
+padding:8px 14px;
+border-radius:20px;
+
 transition:0.3s ease;
-padding:8px 12px;
-border-radius:6px;
 }
 
 nav a:hover{
 color:#D4AF37;
-background:rgba(212,175,55,0.08);
+background:rgba(212,175,55,0.15);
 }
 
 html{
