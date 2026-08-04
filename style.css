@@ -78,11 +78,14 @@ transform:translateY(0);
 }
 
 .hero h2{
-font-size:34px;
+font-size:32px;
 line-height:1.15;
 font-weight:300;
-color:white;
-margin-bottom:20px;
+color:#ffffff;
+text-align:left;
+max-width:500px;
+margin-bottom:12px;
+letter-spacing:1px;
 }
 
 .hero h2 span{
@@ -90,11 +93,14 @@ color:#D4AF37;
 }
 
 .hero p{
-font-size:16px;
-line-height:1.8;
-color:#bdbdbd;
-max-width:600px;
-margin:0;
+font-size:15px;
+line-height:1.7;
+color:#d8d8d8;
+max-width:420px;
+margin-top:0;
+margin-left:25px;
+font-weight:400;
+font-style:italic;
 }
 
 h1{
