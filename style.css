@@ -570,19 +570,24 @@ background:#111111;
 padding:80px 20px;
 }
 
-.gallery .section-title{
-color:black;
-font-size:48px;
-margin-bottom:10px;
+.section-title{
+text-align:center;
+font-size:42px;
+font-weight:300;
+color:#D4AF37;
+letter-spacing:3px;
+margin-bottom:12px;
+text-transform:uppercase;
 }
 
 .gallery-subtitle{
 text-align:center;
-color:#bdbdbd;
-font-size:15px;
+color:#c8c8c8;
+font-size:14px;
 max-width:650px;
 margin:0 auto 35px auto;
 line-height:1.8;
+font-style:italic;
 }
 
     .product-card{
