@@ -78,14 +78,14 @@ transform:translateY(0);
 }
 
 .hero h2{
-font-size:28px;
+font-size:24px;
 line-height:1.2;
-font-weight:600;
+font-weight:900;
 color:#ffffff;
 text-align:left;
 max-width:500px;
 margin-bottom:12px;
-letter-spacing:1px;
+letter-spacing:0.5px;
 }
 
 .hero h2 span{
@@ -98,7 +98,7 @@ line-height:1.7;
 color:#d8d8d8;
 max-width:420px;
 margin-top:0;
-margin-left:25px;
+margin-left:0;
 font-weight:400;
 font-style:italic;
 }
