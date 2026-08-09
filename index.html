@@ -346,7 +346,7 @@ More than a business, Kashmiri Shawl House is a legacy of tradition, artistry an
 <div class="social-links">
 <a href="https://instagram.com/kashmirishawlhouse.in" target="_blank">
 Instagram
-</a>
+</a>r
 </div>
 
 
@@ -355,5 +355,29 @@ Instagram
 © 2026 KashmiriShawlHouse.in
 </p>
 </footer>
+
+<script>
+window.addEventListener("load", function () {
+
+    const splash = document.getElementById("splash-screen");
+    const audio = document.getElementById("welcome-audio");
+
+    audio.play().catch(() => {
+        console.log("Autoplay blocked by browser");
+    });
+
+    setTimeout(() => {
+        splash.style.opacity = "0";
+        splash.style.transition = "opacity 1s ease";
+
+        setTimeout(() => {
+            splash.style.display = "none";
+        }, 1000);
+
+    }, 3500);
+
+});
+</script>
+
 </body>
 </html>
