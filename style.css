@@ -53,18 +53,20 @@ animation: fadeUp 1.3s ease forwards;
 .hero h2 span{
 color:#D4AF37;
 }
+
 .hero p{
 font-size:15px;
 line-height:1.7;
 color:#d8d8d8;
 max-width:420px;
-margin-top:2;
+margin-top:2px;
 margin-left:0;
 font-weight:400;
 font-style:italic;
+
 opacity:0;
-animation: fadeUp 1.2s ease forwards:
-animation-delays:0.4s:    
+animation: fadeUp 1.2s ease forwards;
+animation-delay:0.4s;
 }
 
 h1{
