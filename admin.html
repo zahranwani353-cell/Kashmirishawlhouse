@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kashmiri Shawl House | Admin</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f2eb;
+      color: #222;
+    }
+    header {
+      background: #111;
+      color: #d8b45a;
+      padding: 22px;
+      text-align: center;
+    }
+    main {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    .panel {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px #00000012;
+    }
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 7px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font: inherit;
+    }
+    button {
+      margin-top: 20px;
+      padding: 13px 18px;
+      border: 0;
+      border-radius: 6px;
+      background: #b99a4a;
+      color: #111;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .note {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kashmiri Shawl House</h1>
+    <p>Product Admin Panel</p>
+  </header>
 
+  <main>
+    <div class="panel">
+      <h2>Add New Product</h2>
+      <p class="note">Use this panel to prepare your product details.</p>
+
+      <form id="productForm">
+        <label for="name">Product Name</label>
+        <input id="name" type="text" required
+               placeholder="e.g. Premium Pashmina Shawl">
+
+        <label for="price">Price (INR)</label>
+        <input id="price" type="number" min="0" required
+               placeholder="Enter price">
+
+        <label for="category">Collection</label>
+        <select id="category" required>
+          <option value="">Select collection</option>
+          <option>New Arrivals</option>
+          <option>Pashmina Collection</option>
+          <option>Premium Collection</option>
+          <option>Winter Collection</option>
+        </select>
+
+        <label for="photo">Product Photo</label>
+        <input id="photo" type="file" accept="image/*" required>
+
+        <label for="description">Description</label>
+        <textarea id="description" rows="4" required
+                  placeholder="Describe the product"></textarea>
+
+        <button type="submit">Save Product</button>
+      </form>
+
+      <p class="note">
+        This is the initial interface only. Products are not saved or
+        published yet; database and secure image upload must be connected.
+      </p>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("productForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      alert("Admin interface ready. Database connection is the next step.");
+    });
+  </script>
+</body>
+</html>
