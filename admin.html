@@ -112,28 +112,197 @@
     });
   </script>
 
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+import {
+  getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
+import {
+  getFirestore, collection, addDoc, getDocs,
+  doc, updateDoc, deleteDoc, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDeFQB3iMiTr7QDwjQW1nxpEdYpfmcBRzc",
-    authDomain: "kashmiri-shawl-house.firebaseapp.com",
-    projectId: "kashmiri-shawl-house",
-    storageBucket: "kashmiri-shawl-house.firebasestorage.app",
-    messagingSenderId: "835316672741",
-    appId: "1:835316672741:web:4a1010af10e8904cb54c0c",
-    measurementId: "G-HT079L4276"
+const firebaseConfig = {
+  apiKey: "AIzaSyDeFQB3iMiTr7QDwjQW1nxpEdYpfmcBRzc",
+  authDomain: "kashmiri-shawl-house.firebaseapp.com",
+  projectId: "kashmiri-shawl-house",
+  storageBucket: "kashmiri-shawl-house.firebasestorage.app",
+  messagingSenderId: "835316672741",
+  appId: "1:835316672741:web:4a1010af10e8904cb54c0c",
+  measurementId: "G-HT079L4276"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const form = document.getElementById("productForm");
+
+const login = document.createElement("section");
+login.innerHTML = `
+  <div class="panel" style="margin-bottom:20px">
+    <h2>Admin Login</h2>
+    <input id="adminEmail" type="email" placeholder="Admin email">
+    <input id="adminPassword" type="password" placeholder="Password">
+    <button id="loginBtn">Login</button>
+    <button id="logoutBtn" hidden>Logout</button>
+    <p id="status" role="status"></p>
+  </div>`;
+document.querySelector("main").prepend(login);
+
+const status = document.getElementById("status");
+const saveButton = form.querySelector('button[type="submit"]');
+const photoInput = document.getElementById("photo");
+
+const category = document.getElementById("category");
+category.innerHTML = `
+  <option value="">Select collection</option>
+  <option>All Shawls</option>
+  <option>Kalamkari Suits</option>
+  <option>Stoles</option>
+  <option>Premium Collection</option>
+  <option>New Arrivals</option>`;
+
+const subcategory = document.createElement("input");
+subcategory.id = "subcategory";
+subcategory.placeholder = "Subcategory (e.g. Pashmina)";
+const descriptionLabel = document.querySelector('label[for="description"]');
+descriptionLabel.before(subcategory);
+subcategory.insertAdjacentHTML("beforebegin",
+  '<label for="subcategory">Subcategory</label>');
+
+const imageUrl = document.createElement("input");
+imageUrl.id = "imageUrl";
+imageUrl.type = "url";
+imageUrl.placeholder = "Product image URL (Cloudinary link)";
+photoInput.after(imageUrl);
+photoInput.required = false;
+imageUrl.insertAdjacentHTML("beforebegin",
+  '<label for="imageUrl">Uploaded Image URL</label>');
+
+const list = document.createElement("section");
+list.innerHTML = "<h2>Existing Products</h2><div id='productsList'></div>";
+form.parentElement.append(list);
+
+let editingId = null;
+
+onAuthStateChanged(auth, user => {
+  form.hidden = !user;
+  list.hidden = !user;
+  document.getElementById("logoutBtn").hidden = !user;
+  document.getElementById("loginBtn").hidden = !!user;
+  document.getElementById("adminEmail").hidden = !!user;
+  document.getElementById("adminPassword").hidden = !!user;
+  status.textContent = user ? "Logged in: " + user.email : "Please log in.";
+  if (user) loadProducts();
+});
+
+document.getElementById("loginBtn").onclick = async () => {
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      document.getElementById("adminEmail").value.trim(),
+      document.getElementById("adminPassword").value
+    );
+  } catch (e) {
+    status.textContent = "Login failed: " + e.message;
+  }
+};
+
+document.getElementById("logoutBtn").onclick = () => signOut(auth);
+
+async function loadProducts() {
+  const container = document.getElementById("productsList");
+  container.textContent = "Loading products...";
+  try {
+    const snap = await getDocs(collection(db, "Products"));
+    container.replaceChildren();
+
+    snap.forEach(item => {
+      const p = item.data();
+      const card = document.createElement("div");
+      card.className = "panel";
+      card.style.marginTop = "12px";
+
+      const title = document.createElement("h3");
+      title.textContent = p.name || "Unnamed product";
+      const info = document.createElement("p");
+      info.textContent = `${p.category || ""} · ₹${p.price ?? ""}`;
+
+      const edit = document.createElement("button");
+      edit.textContent = "Edit";
+      edit.onclick = () => {
+        document.getElementById("name").value = p.name || "";
+        document.getElementById("price").value = p.price ?? "";
+        category.value = p.category || "";
+        subcategory.value = p.subcategory || "";
+        document.getElementById("description").value = p.description || "";
+        imageUrl.value = p.imageUrl || "";
+        editingId = item.id;
+        saveButton.textContent = "Update Product";
+        form.scrollIntoView({behavior:"smooth"});
+      };
+
+      const del = document.createElement("button");
+      del.textContent = "Delete";
+      del.style.marginLeft = "8px";
+      del.onclick = async () => {
+        if (!confirm("Delete this product?")) return;
+        try {
+          await deleteDoc(doc(db, "Products", item.id));
+          await loadProducts();
+          status.textContent = "Product deleted.";
+        } catch (e) {
+          status.textContent = "Delete failed: " + e.message;
+        }
+      };
+
+      card.append(title, info, edit, del);
+      container.append(card);
+    });
+
+    if (snap.empty) container.textContent = "No products yet.";
+  } catch (e) {
+    container.textContent = "Could not load products: " + e.message;
+  }
+}
+
+form.addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!auth.currentUser) return;
+
+  if (photoInput.files.length && !imageUrl.value.trim()) {
+    status.textContent = "Photo upload connection will be added next. For now, enter an image URL.";
+    return;
+  }
+
+  const product = {
+    name: document.getElementById("name").value.trim(),
+    price: Number(document.getElementById("price").value),
+    category: category.value,
+    subcategory: subcategory.value.trim(),
+    description: document.getElementById("description").value.trim(),
+    imageUrl: imageUrl.value.trim(),
+    updatedAt: serverTimestamp()
   };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+  try {
+    if (editingId) {
+      await updateDoc(doc(db, "Products", editingId), product);
+      status.textContent = "Product updated!";
+    } else {
+      product.createdAt = serverTimestamp();
+      await addDoc(collection(db, "Products"), product);
+      status.textContent = "Product added!";
+    }
+
+    form.reset();
+    editingId = null;
+    saveButton.textContent = "Save Product";
+    await loadProducts();
+  } catch (e) {
+    status.textContent = "Save failed: " + e.message;
+  }
+});
 </script>
 </body>
 </html>
