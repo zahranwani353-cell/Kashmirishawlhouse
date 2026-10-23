@@ -268,39 +268,92 @@ async function loadProducts() {
 
 form.addEventListener("submit", async event => {
   event.preventDefault();
-  if (!auth.currentUser) return;
 
-  if (photoInput.files.length && !imageUrl.value.trim()) {
-    status.textContent = "Photo upload connection will be added next. For now, enter an image URL.";
+  if (!auth.currentUser) {
+    status.textContent = "Please log in first.";
     return;
   }
 
-  const product = {
-    name: document.getElementById("name").value.trim(),
-    price: Number(document.getElementById("price").value),
-    category: category.value,
-    subcategory: subcategory.value.trim(),
-    description: document.getElementById("description").value.trim(),
-    imageUrl: imageUrl.value.trim(),
-    updatedAt: serverTimestamp()
-  };
+  const file = photoInput.files[0];
+  let uploadedImageUrl = imageUrl.value.trim();
+
+  if (!file && !uploadedImageUrl) {
+    status.textContent = "Please select a product photo.";
+    return;
+  }
+
+  saveButton.disabled = true;
+  status.textContent = file
+    ? "Uploading photo..."
+    : "Saving product...";
 
   try {
+    // Upload the selected photo to Cloudinary
+    if (file) {
+      const uploadData = new FormData();
+      uploadData.append("file", file);
+      uploadData.append(
+        "upload_preset",
+        "kashmiri_shawl_products"
+      );
+
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/zvtpidgt/image/upload",
+        {
+          method: "POST",
+          body: uploadData
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.secure_url) {
+        throw new Error(
+          result.error?.message || "Photo upload failed."
+        );
+      }
+
+      uploadedImageUrl = result.secure_url;
+    }
+
+    // Prepare product details for Firebase
+    const product = {
+      name: document.getElementById("name").value.trim(),
+      price: Number(document.getElementById("price").value),
+      category: category.value,
+      subcategory: subcategory.value.trim(),
+      description: document.getElementById("description").value.trim(),
+      imageUrl: uploadedImageUrl,
+      updatedAt: serverTimestamp()
+    };
+
     if (editingId) {
-      await updateDoc(doc(db, "Products", editingId), product);
-      status.textContent = "Product updated!";
+      await updateDoc(
+        doc(db, "Products", editingId),
+        product
+      );
+      status.textContent = "Product updated successfully!";
     } else {
       product.createdAt = serverTimestamp();
-      await addDoc(collection(db, "Products"), product);
-      status.textContent = "Product added!";
+
+      await addDoc(
+        collection(db, "Products"),
+        product
+      );
+
+      status.textContent = "Product added successfully!";
     }
 
     form.reset();
     editingId = null;
     saveButton.textContent = "Save Product";
+
     await loadProducts();
+
   } catch (e) {
-    status.textContent = "Save failed: " + e.message;
+    status.textContent = "Error: " + e.message;
+  } finally {
+    saveButton.disabled = false;
   }
 });
 </script>
