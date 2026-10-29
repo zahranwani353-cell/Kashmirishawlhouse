@@ -30,7 +30,7 @@ const searchForm = document.getElementById("searchForm");
 const filtersContainer = document.getElementById("collectionFilters");
 const resetButton = document.getElementById("resetProducts");
 
-const WHATSAPP_NUMBER = "918082460330";
+const WHATSAPP_NUMBER = "918492887404";
 
 let allProducts = [];
 let activeFilter = "All";
