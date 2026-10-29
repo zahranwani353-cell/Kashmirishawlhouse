@@ -2022,3 +2022,18 @@ button {
   }
 }
 
+.developer-credit {
+  text-align: center;
+  padding: 18px 12px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #aaa;
+  border-top: 1px solid rgba(191, 161, 106, 0.2);
+}
+
+.developer-credit strong {
+  color: #bfa16a;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
