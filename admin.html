@@ -1,301 +1,682 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kashmiri Shawl House | Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171612">
+
+  <title>Admin Dashboard | Kashmiri Shawl House</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --black: #171612;
+      --cream: #f8f5ee;
+      --white: #fffefa;
+      --gold: #b99a55;
+      --gold-light: #d7bd7c;
+      --text: #29271f;
+      --muted: #777266;
+      --border: #e4ded2;
+      --success: #246b42;
+      --error: #a52f2f;
+    }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f2eb;
-      color: #222;
+      background: var(--cream);
+      color: var(--text);
+      font-family: "DM Sans", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
     }
-    header {
-      background: #111;
-      color: #d8b45a;
-      padding: 22px;
+
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    [hidden] { display: none !important; }
+
+    .topbar {
+      padding: 22px 20px;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .topbar-inner {
+      width: min(100%, 1080px);
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 22px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    .brand p {
+      margin: 4px 0 0;
+      color: var(--gold-light);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+    }
+
+    .top-label {
+      color: var(--gold-light);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-align: right;
+    }
+
+    main {
+      width: min(100% - 32px, 1080px);
+      margin: 32px auto 60px;
+    }
+
+    .intro { margin-bottom: 25px; }
+
+    .eyebrow {
+      color: #92753a;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    h2 {
+      margin: 8px 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(32px, 5vw, 43px);
+      line-height: 1.15;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .panel {
+      margin-bottom: 25px;
+      padding: 26px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      box-shadow: 0 5px 24px #00000006;
+    }
+
+    .panel-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .panel-heading h2 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid #d8d1c4;
+      border-radius: 0;
+      outline: none;
+      background: #fff;
+      color: var(--text);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px #b99a551a;
+    }
+
+    input[type="file"] {
+      padding: 10px;
+      font-size: 11px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .button-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      min-height: 43px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 18px;
+      border: 1px solid transparent;
+      font-size: 11px;
+      font-weight: 700;
+      transition: background .2s ease;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .btn-primary:hover { background: var(--gold-light); }
+
+    .btn-dark {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .btn-dark:hover { background: #353126; }
+
+    .btn-secondary {
+      border-color: var(--border);
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn-secondary:hover { background: var(--cream); }
+
+    .btn-danger {
+      border: 1px solid #e8caca;
+      background: #fff6f6;
+      color: var(--error);
+    }
+
+    button:disabled {
+      cursor: wait;
+      opacity: .6;
+    }
+
+    .status {
+      margin: 14px 0 0;
+      padding: 0;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .status:empty { display: none; }
+
+    .status.success {
+      padding: 11px 13px;
+      border: 1px solid #c9e1d0;
+      background: #f0faf2;
+      color: var(--success);
+    }
+
+    .status.error {
+      padding: 11px 13px;
+      border: 1px solid #ebcaca;
+      background: #fff5f5;
+      color: var(--error);
+    }
+
+    .login-panel {
+      max-width: 500px;
+      margin: 30px auto;
+    }
+
+    .login-fields {
+      display: grid;
+      gap: 15px;
+    }
+
+    .login-fields .btn { width: 100%; }
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .product-item {
+      display: grid;
+      grid-template-columns: 100px minmax(0, 1fr);
+      gap: 15px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    .product-item img {
+      width: 100px;
+      height: 120px;
+      object-fit: cover;
+      background: var(--cream);
+    }
+
+    .product-item h3 {
+      margin: 0 0 5px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 22px;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .product-item p {
+      margin: 4px 0;
+      color: var(--muted);
+      font-size: 11px;
+      overflow-wrap: anywhere;
+    }
+
+    .product-item .price {
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .product-item .button-row { margin-top: 12px; }
+    .product-item .btn { min-height: 35px; padding: 8px 11px; }
+
+    .preview {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .preview img {
+      width: 75px;
+      height: 85px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+    }
+
+    .preview p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer-note {
+      padding: 20px 0;
+      color: var(--muted);
+      font-size: 10px;
       text-align: center;
     }
-    main {
-      max-width: 700px;
-      margin: 30px auto;
-      padding: 20px;
+
+    @media (max-width: 700px) {
+      .topbar { padding: 18px 15px; }
+      .brand-mark { width: 40px; height: 40px; }
+      .brand h1 { font-size: 10px; letter-spacing: 1.2px; }
+      .brand p { font-size: 8px; letter-spacing: 1px; }
+      .top-label { font-size: 8px; }
+      main { width: calc(100% - 24px); margin-top: 23px; }
+      .panel { padding: 19px 15px; }
+      .form-grid { grid-template-columns: 1fr; gap: 15px; }
+      .field.full { grid-column: auto; }
+      .product-list { grid-template-columns: 1fr; }
+      .product-item { grid-template-columns: 85px minmax(0, 1fr); gap: 12px; }
+      .product-item img { width: 85px; height: 110px; }
+      .button-row .btn { flex: 1; }
     }
-    .panel {
-      background: white;
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: 0 3px 15px #00000012;
-    }
-    label {
-      display: block;
-      margin-top: 16px;
-      font-weight: bold;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 12px;
-      margin-top: 7px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font: inherit;
-    }
-    button {
-      margin-top: 20px;
-      padding: 13px 18px;
-      border: 0;
-      border-radius: 6px;
-      background: #b99a4a;
-      color: #111;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .note {
-      color: #666;
-      font-size: 14px;
-      line-height: 1.5;
+
+    @media (max-width: 360px) {
+      .top-label { display: none; }
+      .product-item { grid-template-columns: 1fr; }
+      .product-item img { width: 100%; height: 180px; }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Kashmiri Shawl House</h1>
-    <p>Product Admin Panel</p>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">KSH</div>
+        <div>
+          <h1>KASHMIRI SHAWL HOUSE</h1>
+          <p>PRODUCT ADMIN PANEL</p>
+        </div>
+      </div>
+      <div class="top-label">PRIVATE ADMIN AREA</div>
+    </div>
   </header>
 
   <main>
-    <div class="panel">
-      <h2>Add New Product</h2>
-      <p class="note">Use this panel to prepare your product details.</p>
+    <div class="intro">
+      <span class="eyebrow">YOUR STORE · YOUR COLLECTION</span>
+      <h2>Product Dashboard</h2>
+      <p class="muted">Manage your products and keep your online collection up to date.</p>
+    </div>
 
-      <form id="productForm">
-        <label for="name">Product Name</label>
-        <input id="name" type="text" required
-               placeholder="e.g. Premium Pashmina Shawl">
+    <!-- Login -->
+    <section class="panel login-panel" id="loginPanel">
+      <div class="panel-heading">
+        <h2>Admin Login</h2>
+      </div>
 
-        <label for="price">Price (INR)</label>
-        <input id="price" type="number" min="0" required
-               placeholder="Enter price">
+      <form id="loginForm" class="login-fields">
+        <div class="field">
+          <label for="adminEmail">Email address</label>
+          <input id="adminEmail" type="email" autocomplete="username"
+                 placeholder="Admin email" required>
+        </div>
 
-        <label for="category">Collection</label>
-        <select id="category" required>
-          <option value="">Select collection</option>
-          <option>New Arrivals</option>
-          <option>Pashmina Collection</option>
-          <option>Premium Collection</option>
-          <option>Winter Collection</option>
-        </select>
+        <div class="field">
+          <label for="adminPassword">Password</label>
+          <input id="adminPassword" type="password"
+                 autocomplete="current-password"
+                 placeholder="Your password" required>
+        </div>
 
-        <label for="photo">Product Photo</label>
-        <input id="photo" type="file" accept="image/*" required>
-
-        <label for="description">Description</label>
-        <textarea id="description" rows="4" required
-                  placeholder="Describe the product"></textarea>
-
-        <button type="submit">Save Product</button>
+        <button class="btn btn-primary" id="loginBtn" type="submit">
+          Log In
+        </button>
       </form>
 
-      <p class="note">
-        This is the initial interface only. Products are not saved or
-        published yet; database and secure image upload must be connected.
-      </p>
-    </div>
+      <p class="status" id="loginStatus" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dashboard" hidden>
+      <div class="panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">PRODUCT MANAGEMENT</span>
+            <h2 id="formHeading">Add New Product</h2>
+          </div>
+          <button class="btn btn-secondary" id="logoutBtn" type="button">
+            Log Out
+          </button>
+        </div>
+
+        <p class="muted">Add the details below. Saved products will be stored in your Firebase database.</p>
+
+        <form id="productForm">
+          <div class="form-grid">
+            <div class="field full">
+              <label for="name">Product Name *</label>
+              <input id="name" type="text" maxlength="150"
+                     placeholder="e.g. Premium Kashmiri Pashmina Shawl"
+                     required>
+            </div>
+
+            <div class="field">
+              <label for="price">Price (INR) *</label>
+              <input id="price" type="number" min="0" step="1"
+                     placeholder="Enter price" required>
+            </div>
+
+            <div class="field">
+              <label for="category">Collection *</label>
+              <select id="category" required>
+                <option value="">Select collection</option>
+                <option value="All Shawls">All Shawls</option>
+                <option value="Kalamkari Suits">Kalamkari Suits</option>
+                <option value="Stoles">Stoles</option>
+                <option value="Premium Collection">Premium Collection</option>
+                <option value="New Arrivals">New Arrivals</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="photo">Product Photo *</label>
+              <input id="photo" type="file" accept="image/*">
+              <p class="hint" id="photoHint">
+                Choose a clear product image. For existing products, leave empty to keep the current photo.
+              </p>
+              <div class="preview" id="imagePreview" hidden>
+                <img id="previewImage" alt="Selected product preview">
+                <p id="previewText">Selected photo preview</p>
+              </div>
+            </div>
+
+            <div class="field full">
+              <label for="description">Description *</label>
+              <textarea id="description" maxlength="2000"
+                        placeholder="Describe the fabric, colour, design and other details..."
+                        required></textarea>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button class="btn btn-primary" id="saveButton" type="submit">
+              Save Product
+            </button>
+            <button class="btn btn-secondary" id="cancelButton"
+                    type="button" hidden>
+              Cancel Edit
+            </button>
+          </div>
+
+          <!-- Status appears directly below the Save button -->
+          <p class="status" id="saveStatus" role="status"
+             aria-live="polite"></p>
+        </form>
+      </div>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">YOUR CATALOGUE</span>
+            <h2>Existing Products</h2>
+          </div>
+          <button class="btn btn-secondary" id="refreshButton" type="button">
+            Refresh
+          </button>
+        </div>
+
+        <p class="muted" id="listStatus" role="status" aria-live="polite"></p>
+        <div class="product-list" id="productsList"></div>
+      </section>
+    </section>
+
+    <p class="footer-note">
+      Kashmiri Shawl House · Admin Dashboard
+    </p>
   </main>
 
-  <script>
- 
-  </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
-import {
-  getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
-} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
-import {
-  getFirestore, collection, addDoc, getDocs,
-  doc, updateDoc, deleteDoc, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      doc,
+      updateDoc,
+      deleteDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDeFQB3iMiTr7QDwjQW1nxpEdYpfmcBRzc",
-  authDomain: "kashmiri-shawl-house.firebaseapp.com",
-  projectId: "kashmiri-shawl-house",
-  storageBucket: "kashmiri-shawl-house.firebasestorage.app",
-  messagingSenderId: "835316672741",
-  appId: "1:835316672741:web:4a1010af10e8904cb54c0c",
-  measurementId: "G-HT079L4276"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyDeFQB3iMiTr7QDwjQW1nxpEdYpfmcBRzc",
+      authDomain: "kashmiri-shawl-house.firebaseapp.com",
+      projectId: "kashmiri-shawl-house",
+      storageBucket: "kashmiri-shawl-house.firebasestorage.app",
+      messagingSenderId: "835316672741",
+      appId: "1:835316672741:web:4a1010af10e8904cb54c0c",
+      measurementId: "G-HT079L4276"
+    };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const form = document.getElementById("productForm");
+    const CLOUDINARY_CLOUD_NAME = "zvtpidgt";
+    const CLOUDINARY_UPLOAD_PRESET = "kashmiri_shawl_products";
 
-const login = document.createElement("section");
-login.innerHTML = `
-  <div class="panel" style="margin-bottom:20px">
-    <h2>Admin Login</h2>
-    <input id="adminEmail" type="email" placeholder="Admin email">
-    <input id="adminPassword" type="password" placeholder="Password">
-    <button id="loginBtn">Login</button>
-    <button id="logoutBtn" hidden>Logout</button>
-    <p id="status" role="status"></p>
-  </div>`;
-document.querySelector("main").prepend(login);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-const status = document.getElementById("status");
-const saveButton = form.querySelector('button[type="submit"]');
-const photoInput = document.getElementById("photo");
+    const loginPanel = document.getElementById("loginPanel");
+    const loginForm = document.getElementById("loginForm");
+    const loginBtn = document.getElementById("loginBtn");
+    const loginStatus = document.getElementById("loginStatus");
 
-const category = document.getElementById("category");
-category.innerHTML = `
-  <option value="">Select collection</option>
-  <option>All Shawls</option>
-  <option>Kalamkari Suits</option>
-  <option>Stoles</option>
-  <option>Premium Collection</option>
-  <option>New Arrivals</option>`;
+    const dashboard = document.getElementById("dashboard");
+    const logoutBtn = document.getElementById("logoutBtn");
 
-const subcategory = document.createElement("input");
-subcategory.id = "subcategory";
-subcategory.placeholder = "Subcategory (e.g. Pashmina)";
-const descriptionLabel = document.querySelector('label[for="description"]');
-descriptionLabel.before(subcategory);
-subcategory.insertAdjacentHTML("beforebegin",
-  '<label for="subcategory">Subcategory</label>');
+    const form = document.getElementById("productForm");
+    const formHeading = document.getElementById("formHeading");
+    const nameInput = document.getElementById("name");
+    const priceInput = document.getElementById("price");
+    const categoryInput = document.getElementById("category");
+    const photoInput = document.getElementById("photo");
+    const descriptionInput = document.getElementById("description");
 
-const imageUrl = document.createElement("input");
-imageUrl.id = "imageUrl";
-imageUrl.type = "url";
-imageUrl.placeholder = "Product image URL (Cloudinary link)";
-photoInput.after(imageUrl);
-photoInput.required = false;
-imageUrl.insertAdjacentHTML("beforebegin",
-  '<label for="imageUrl">Uploaded Image URL</label>');
+    const saveButton = document.getElementById("saveButton");
+    const cancelButton = document.getElementById("cancelButton");
+    const saveStatus = document.getElementById("saveStatus");
 
-const list = document.createElement("section");
-list.innerHTML = "<h2>Existing Products</h2><div id='productsList'></div>";
-form.parentElement.append(list);
+    const productsList = document.getElementById("productsList");
+    const listStatus = document.getElementById("listStatus");
+    const refreshButton = document.getElementById("refreshButton");
 
-let editingId = null;
+    const imagePreview = document.getElementById("imagePreview");
+    const previewImage = document.getElementById("previewImage");
+    const previewText = document.getElementById("previewText");
 
-onAuthStateChanged(auth, user => {
-  form.hidden = !user;
-  list.hidden = !user;
-  document.getElementById("logoutBtn").hidden = !user;
-  document.getElementById("loginBtn").hidden = !!user;
-  document.getElementById("adminEmail").hidden = !!user;
-  document.getElementById("adminPassword").hidden = !!user;
-  status.textContent = user ? "Logged in: " + user.email : "Please log in.";
-  if (user) loadProducts();
-});
+    let editingId = null;
+    let editingImageUrl = "";
+    let currentProducts = [];
+    let busy = false;
 
-document.getElementById("loginBtn").onclick = async () => {
-  try {
-    await signInWithEmailAndPassword(
-      auth,
-      document.getElementById("adminEmail").value.trim(),
-      document.getElementById("adminPassword").value
-    );
-  } catch (e) {
-    status.textContent = "Login failed: " + e.message;
-  }
-};
+    function setStatus(element, message, type = "") {
+      element.textContent = message;
+      element.className = "status" + (type ? " " + type : "");
+    }
 
-document.getElementById("logoutBtn").onclick = () => signOut(auth);
+    function setBusy(value) {
+      busy = value;
+      saveButton.disabled = value;
+      cancelButton.disabled = value;
+      refreshButton.disabled = value;
+      logoutBtn.disabled = value;
+      loginBtn.disabled = value;
+    }
 
-async function loadProducts() {
-  const container = document.getElementById("productsList");
-  container.textContent = "Loading products...";
-  try {
-    const snap = await getDocs(collection(db, "Products"));
-    container.replaceChildren();
+    function formatPrice(value) {
+      const amount = Number(value);
 
-    snap.forEach(item => {
-      const p = item.data();
-      const card = document.createElement("div");
-      card.className = "panel";
-      card.style.marginTop = "12px";
+      if (!Number.isFinite(amount)) return "Price on request";
 
-      const title = document.createElement("h3");
-      title.textContent = p.name || "Unnamed product";
-      const info = document.createElement("p");
-      info.textContent = `${p.category || ""} · ₹${p.price ?? ""}`;
+      return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 0
+      }).format(amount);
+    }
 
-      const edit = document.createElement("button");
-      edit.textContent = "Edit";
-      edit.onclick = () => {
-        document.getElementById("name").value = p.name || "";
-        document.getElementById("price").value = p.price ?? "";
-        category.value = p.category || "";
-        subcategory.value = p.subcategory || "";
-        document.getElementById("description").value = p.description || "";
-        imageUrl.value = p.imageUrl || "";
-        editingId = item.id;
-        saveButton.textContent = "Update Product";
-        form.scrollIntoView({behavior:"smooth"});
-      };
+    function showImagePreview(url, label) {
+      if (!url) {
+        imagePreview.hidden = true;
+        previewImage.removeAttribute("src");
+        return;
+      }
 
-      const del = document.createElement("button");
-      del.textContent = "Delete";
-      del.style.marginLeft = "8px";
-      del.onclick = async () => {
-        if (!confirm("Delete this product?")) return;
-        try {
-          await deleteDoc(doc(db, "Products", item.id));
-          await loadProducts();
-          status.textContent = "Product deleted.";
-        } catch (e) {
-          status.textContent = "Delete failed: " + e.message;
-        }
-      };
+      previewImage.src = url;
+      previewText.textContent = label;
+      imagePreview.hidden = false;
+    }
 
-      card.append(title, info, edit, del);
-      container.append(card);
-    });
+    function resetProductForm() {
+      form.reset();
+      editingId = null;
+      editingImageUrl = "";
+      formHeading.textContent = "Add New Product";
+      saveButton.textContent = "Save Product";
+      cancelButton.hidden = true;
+      photoInput.required = true;
+      showImagePreview("", "");
+    }
 
-    if (snap.empty) container.textContent = "No products yet.";
-  } catch (e) {
-    container.textContent = "Could not load products: " + e.message;
-  }
-}
+    function beginEdit(product) {
+      if (busy) return;
 
-form.addEventListener("submit", async event => {
-  event.preventDefault();
+      editingId = product.id;
+      editingImageUrl = product.imageUrl || "";
 
-  if (!auth.currentUser) {
-    status.textContent = "Please log in first.";
-    return;
-  }
+      nameInput.value = product.name || "";
+      priceInput.value = product.price ?? "";
+      categoryInput.value = product.category || "";
+      descriptionInput.value = product.description || "";
 
-  const file = photoInput.files[0];
-  let uploadedImageUrl = imageUrl.value.trim();
+      photoInput.value = "";
+      photoInput.required = !editingImageUrl;
 
-  if (!file && !uploadedImageUrl) {
-    status.textContent = "Please select a product photo.";
-    return;
-  }
+      formHeading.textContent = "Edit Product";
+      saveButton.textContent = "Update Product";
+      cancelButton.hidden = false;
 
-  saveButton.disabled = true;
-  status.textContent = file
-    ? "Uploading photo..."
-    : "Saving product...";
+      setStatus(saveStatus, "Editing: " + (product.name || "Product"));
+      showImagePreview(editingImageUrl, "Current product photo");
 
-  try {
-    // Upload the selected photo to Cloudinary
-    if (file) {
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    async function uploadPhoto(file) {
       const uploadData = new FormData();
       uploadData.append("file", file);
-      uploadData.append(
-        "upload_preset",
-        "kashmiri_shawl_products"
-      );
+      uploadData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
       const response = await fetch(
-        "https://api.cloudinary.com/v1_1/zvtpidgt/image/upload",
+        "https://api.cloudinary.com/v1_1/" +
+          CLOUDINARY_CLOUD_NAME + "/image/upload",
         {
           method: "POST",
           body: uploadData
@@ -310,49 +691,304 @@ form.addEventListener("submit", async event => {
         );
       }
 
-      uploadedImageUrl = result.secure_url;
+      return result.secure_url;
     }
 
-    // Prepare product details for Firebase
-    const product = {
-      name: document.getElementById("name").value.trim(),
-      price: Number(document.getElementById("price").value),
-      category: category.value,
-      subcategory: subcategory.value.trim(),
-      description: document.getElementById("description").value.trim(),
-      imageUrl: uploadedImageUrl,
-      updatedAt: serverTimestamp()
-    };
+    function createProductCard(product) {
+      const card = document.createElement("article");
+      card.className = "product-item";
 
-    if (editingId) {
-      await updateDoc(
-        doc(db, "Products", editingId),
-        product
-      );
-      status.textContent = "Product updated successfully!";
-    } else {
-      product.createdAt = serverTimestamp();
+      const image = document.createElement("img");
+      image.alt = product.name || "Product photo";
+      image.loading = "lazy";
 
-      await addDoc(
-        collection(db, "Products"),
-        product
-      );
+      if (product.imageUrl) {
+        image.src = product.imageUrl;
+      } else {
+        image.alt = "No product photo available";
+      }
 
-      status.textContent = "Product added successfully!";
+      const details = document.createElement("div");
+      const title = document.createElement("h3");
+      title.textContent = product.name || "Unnamed product";
+
+      const category = document.createElement("p");
+      category.textContent = product.category || "No collection";
+
+      const price = document.createElement("p");
+      price.className = "price";
+      price.textContent = formatPrice(product.price);
+
+      const editButton = document.createElement("button");
+      editButton.type = "button";
+      editButton.className = "btn btn-secondary";
+      editButton.textContent = "Edit";
+      editButton.addEventListener("click", () => beginEdit(product));
+
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.className = "btn btn-danger";
+      deleteButton.textContent = "Delete";
+
+      deleteButton.addEventListener("click", async () => {
+        if (busy) return;
+
+        const confirmed = confirm(
+          'Delete "' + (product.name || "this product") + '"? This cannot be undone.'
+        );
+
+        if (!confirmed) return;
+
+        deleteButton.disabled = true;
+        setStatus(listStatus, "Deleting product...");
+
+        try {
+          await deleteDoc(doc(db, "Products", product.id));
+
+          if (editingId === product.id) {
+            resetProductForm();
+            setStatus(saveStatus, "The product was deleted.");
+          }
+
+          setStatus(listStatus, "Product deleted successfully.", "success");
+          await loadProducts();
+        } catch (error) {
+          console.error(error);
+          setStatus(listStatus, "Delete failed: " + error.message, "error");
+          deleteButton.disabled = false;
+        }
+      });
+
+      const actions = document.createElement("div");
+      actions.className = "button-row";
+      actions.append(editButton, deleteButton);
+
+      details.append(title, category, price, actions);
+      card.append(image, details);
+
+      return card;
     }
 
-    form.reset();
-    editingId = null;
-    saveButton.textContent = "Save Product";
+    async function loadProducts() {
+      productsList.replaceChildren();
+      setStatus(listStatus, "Loading products...");
 
-    await loadProducts();
+      try {
+        const snapshot = await getDocs(collection(db, "Products"));
 
-  } catch (e) {
-    status.textContent = "Error: " + e.message;
-  } finally {
-    saveButton.disabled = false;
-  }
-});
-</script>
+        currentProducts = snapshot.docs.map(item => ({
+          id: item.id,
+          ...item.data()
+        }));
+
+        currentProducts.sort((a, b) =>
+          String(a.name || "").localeCompare(String(b.name || ""))
+        );
+
+        if (currentProducts.length === 0) {
+          setStatus(listStatus, "No products yet. Add your first product above.");
+          return;
+        }
+
+        const fragment = document.createDocumentFragment();
+
+        currentProducts.forEach(product => {
+          fragment.append(createProductCard(product));
+        });
+
+        productsList.append(fragment);
+        setStatus(
+          listStatus,
+          currentProducts.length + " product(s) in your catalogue.",
+          "success"
+        );
+      } catch (error) {
+        console.error(error);
+        setStatus(
+          listStatus,
+          "Could not load products: " + error.message,
+          "error"
+        );
+      }
+    }
+
+    loginForm.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      if (busy) return;
+
+      loginBtn.disabled = true;
+      setStatus(loginStatus, "Signing in...");
+
+      try {
+        await signInWithEmailAndPassword(
+          auth,
+          document.getElementById("adminEmail").value.trim(),
+          document.getElementById("adminPassword").value
+        );
+
+        loginForm.reset();
+        setStatus(loginStatus, "");
+      } catch (error) {
+        console.error(error);
+        setStatus(
+          loginStatus,
+          "Login failed. Check your email, password and Firebase Authentication settings.",
+          "error"
+        );
+      } finally {
+        loginBtn.disabled = false;
+      }
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+      if (busy) return;
+
+      try {
+        await signOut(auth);
+        resetProductForm();
+        setStatus(saveStatus, "");
+      } catch (error) {
+        console.error(error);
+        setStatus(saveStatus, "Logout failed: " + error.message, "error");
+      }
+    });
+
+    cancelButton.addEventListener("click", () => {
+      if (busy) return;
+      resetProductForm();
+      setStatus(saveStatus, "Edit cancelled.");
+    });
+
+    photoInput.addEventListener("change", () => {
+      const file = photoInput.files[0];
+
+      if (!file) {
+        showImagePreview(
+          editingImageUrl,
+          editingImageUrl ? "Current product photo" : ""
+        );
+        return;
+      }
+
+      if (!file.type.startsWith("image/")) {
+        photoInput.value = "";
+        setStatus(saveStatus, "Please choose a valid image file.", "error");
+        return;
+      }
+
+      if (file.size > 10 * 1024 * 1024) {
+        photoInput.value = "";
+        setStatus(saveStatus, "Image must be smaller than 10 MB.", "error");
+        return;
+      }
+
+      const objectUrl = URL.createObjectURL(file);
+      showImagePreview(objectUrl, file.name);
+    });
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      if (busy) return;
+
+      if (!auth.currentUser) {
+        setStatus(saveStatus, "Please log in first.", "error");
+        return;
+      }
+
+      const file = photoInput.files[0];
+
+      if (!file && !editingImageUrl) {
+        setStatus(saveStatus, "Please select a product photo.", "error");
+        return;
+      }
+
+      if (file && !file.type.startsWith("image/")) {
+        setStatus(saveStatus, "Please select a valid image file.", "error");
+        return;
+      }
+
+      if (file && file.size > 10 * 1024 * 1024) {
+        setStatus(saveStatus, "Image must be smaller than 10 MB.", "error");
+        return;
+      }
+
+      const name = nameInput.value.trim();
+      const price = Number(priceInput.value);
+      const description = descriptionInput.value.trim();
+
+      if (!name || !Number.isFinite(price) || price < 0 || !description) {
+        setStatus(saveStatus, "Please complete all required fields.", "error");
+        return;
+      }
+
+      setBusy(true);
+      setStatus(
+        saveStatus,
+        file ? "Uploading photo and saving product..." : "Saving product..."
+      );
+
+      try {
+        let imageUrl = editingImageUrl;
+
+        if (file) {
+          imageUrl = await uploadPhoto(file);
+        }
+
+        const product = {
+          name,
+          price,
+          category: categoryInput.value,
+          description,
+          imageUrl,
+          updatedAt: serverTimestamp()
+        };
+
+        if (editingId) {
+          await updateDoc(doc(db, "Products", editingId), product);
+          setStatus(saveStatus, "Product updated successfully!", "success");
+        } else {
+          product.createdAt = serverTimestamp();
+
+          await addDoc(collection(db, "Products"), product);
+          setStatus(saveStatus, "Product added successfully!", "success");
+        }
+
+        resetProductForm();
+        await loadProducts();
+
+        // Keep the save result visible below the form button.
+        setStatus(
+          saveStatus,
+          editingId ? "Product saved successfully!" : "Product saved successfully!",
+          "success"
+        );
+      } catch (error) {
+        console.error(error);
+        setStatus(saveStatus, "Error: " + error.message, "error");
+      } finally {
+        setBusy(false);
+      }
+    });
+
+    refreshButton.addEventListener("click", () => {
+      if (!busy) loadProducts();
+    });
+
+    onAuthStateChanged(auth, async user => {
+      loginPanel.hidden = !!user;
+      dashboard.hidden = !user;
+
+      if (user) {
+        setStatus(loginStatus, "");
+        await loadProducts();
+      } else {
+        currentProducts = [];
+        productsList.replaceChildren();
+        setStatus(listStatus, "");
+      }
+    });
+  </script>
 </body>
 </html>
