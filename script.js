@@ -35,7 +35,7 @@ let searchTerm = "";
 
 /* Change this to your actual WhatsApp number.
    Include country code, without +, spaces or dashes. */
-const WHATSAPP_NUMBER = "919888000000";
+const WHATSAPP_NUMBER = "918082460330";
 
 /* Safe text helper */
 function makeElement(tag, className, text) {
