@@ -1,4 +1,5 @@
 
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
 import {
   getFirestore,
@@ -29,36 +30,34 @@ const searchForm = document.getElementById("searchForm");
 const filtersContainer = document.getElementById("collectionFilters");
 const resetButton = document.getElementById("resetProducts");
 
+const WHATSAPP_NUMBER = "918082460330";
+
 let allProducts = [];
 let activeFilter = "All";
 let searchTerm = "";
+let lightbox;
+let lightboxImage;
+let lightboxCategory;
+let lightboxTitle;
+let lightboxDescription;
+let lightboxPrice;
+let lightboxOrder;
+let zoomed = false;
 
-/* Change this to your actual WhatsApp number.
-   Include country code, without +, spaces or dashes. */
-const WHATSAPP_NUMBER = "918082460330";
-
-/* Safe text helper */
+/* Helpers */
 function makeElement(tag, className, text) {
   const element = document.createElement(tag);
 
-  if (className) {
-    element.className = className;
-  }
-
-  if (text !== undefined) {
-    element.textContent = text;
-  }
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
 
   return element;
 }
 
-/* Format price in Indian Rupees */
 function formatPrice(price) {
   const amount = Number(price);
 
-  if (!Number.isFinite(amount)) {
-    return "Price on request";
-  }
+  if (!Number.isFinite(amount)) return "Price on request";
 
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -67,17 +66,35 @@ function formatPrice(price) {
   }).format(amount);
 }
 
-/* Normalize category names for filtering */
 function normalizeCategory(category) {
-  return String(category || "").trim().toLowerCase();
+  const value = String(category || "").trim().toLowerCase();
+
+  const aliases = {
+    "all shawls": "shawls",
+    "pashmina collection": "shawls",
+    "premium collection": "shawls",
+    "winter collection": "shawls",
+    "kalamkari suits": "suits",
+    "suit": "suits",
+    "fheran": "fheran",
+    "fheran": "fheran",
+    "fherans": "fheran",
+    "shawl": "shawls",
+    "stole": "stoles"
+  };
+
+  return aliases[value] || value;
 }
 
-/* WhatsApp order link */
+function getProductCategory(product) {
+  return normalizeCategory(product.category);
+}
+
 function createWhatsAppLink(product) {
   const message = [
     "Hello Kashmiri Shawl House,",
     "",
-    "I am interested in this product:",
+    "I am interested in:",
     product.name || "Kashmiri product",
     "Price: " + formatPrice(product.price),
     "Collection: " + (product.category || "Not specified"),
@@ -89,18 +106,124 @@ function createWhatsAppLink(product) {
     "?text=" + encodeURIComponent(message);
 }
 
-/* Render one product card */
+/* Product photo viewer */
+function createLightbox() {
+  lightbox = makeElement("div", "product-lightbox");
+  lightbox.setAttribute("role", "dialog");
+  lightbox.setAttribute("aria-modal", "true");
+  lightbox.setAttribute("aria-label", "Product details");
+  lightbox.setAttribute("aria-hidden", "true");
+
+  const closeButton = makeElement("button", "lightbox-close", "×");
+  closeButton.type = "button";
+  closeButton.setAttribute("aria-label", "Close product viewer");
+
+  const content = makeElement("div", "lightbox-content");
+  const imageArea = makeElement("div", "lightbox-image-area");
+
+  lightboxImage = makeElement("img", "lightbox-image");
+  lightboxImage.alt = "";
+
+  const zoomHint = makeElement(
+    "p",
+    "lightbox-zoom-hint",
+    "Tap the photo to zoom in or out"
+  );
+
+  imageArea.append(lightboxImage, zoomHint);
+
+  const details = makeElement("div", "lightbox-details");
+  lightboxCategory = makeElement("p", "lightbox-category");
+  lightboxTitle = makeElement("h2", "");
+  lightboxDescription = makeElement("p", "lightbox-description");
+  lightboxPrice = makeElement("p", "lightbox-price");
+  lightboxOrder = makeElement("a", "lightbox-order", "Order on WhatsApp");
+
+  lightboxOrder.target = "_blank";
+  lightboxOrder.rel = "noopener noreferrer";
+
+  details.append(
+    lightboxCategory,
+    lightboxTitle,
+    lightboxDescription,
+    lightboxPrice,
+    lightboxOrder
+  );
+
+  content.append(imageArea, details);
+  lightbox.append(closeButton, content);
+  document.body.append(lightbox);
+
+  function closeLightbox() {
+    lightbox.classList.remove("is-open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    zoomed = false;
+    lightboxImage.classList.remove("is-zoomed");
+  }
+
+  closeButton.addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", event => {
+    if (event.target === lightbox) closeLightbox();
+  });
+
+  lightboxImage.addEventListener("click", () => {
+    zoomed = !zoomed;
+    lightboxImage.classList.toggle("is-zoomed", zoomed);
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+      closeLightbox();
+    }
+  });
+}
+
+function openLightbox(product) {
+  if (!product.imageUrl) return;
+
+  if (!lightbox) createLightbox();
+
+  zoomed = false;
+  lightboxImage.classList.remove("is-zoomed");
+
+  lightboxImage.src = product.imageUrl;
+  lightboxImage.alt = product.name || "Kashmiri product";
+  lightboxCategory.textContent = product.category || "Kashmiri Collection";
+  lightboxTitle.textContent = product.name || "Kashmiri Product";
+  lightboxDescription.textContent =
+    product.description || "Contact us on WhatsApp for more product details.";
+  lightboxPrice.textContent = formatPrice(product.price);
+  lightboxOrder.href = createWhatsAppLink(product);
+
+  lightbox.classList.add("is-open");
+  lightbox.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+/* Product card */
 function createProductCard(product) {
   const card = makeElement("article", "product-card");
   const imageWrap = makeElement("div", "product-image-wrap");
 
   if (product.imageUrl) {
-    const image = document.createElement("img");
-    image.className = "product-image";
+    const image = makeElement("img", "product-image");
     image.src = product.imageUrl;
-    image.alt = product.name || "Kashmiri shawl";
+    image.alt = product.name || "Kashmiri product";
     image.loading = "lazy";
     image.decoding = "async";
+    image.tabIndex = 0;
+    image.setAttribute("role", "button");
+    image.setAttribute("aria-label", "View " + (product.name || "product"));
+
+    image.addEventListener("click", () => openLightbox(product));
+    image.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openLightbox(product);
+      }
+    });
 
     image.onerror = () => {
       image.remove();
@@ -108,11 +231,7 @@ function createProductCard(product) {
 
       if (!imageWrap.querySelector(".image-fallback")) {
         imageWrap.append(
-          makeElement(
-            "span",
-            "image-fallback",
-            "Kashmiri Shawl House"
-          )
+          makeElement("span", "image-fallback", "Image unavailable")
         );
       }
     };
@@ -121,16 +240,12 @@ function createProductCard(product) {
   } else {
     imageWrap.classList.add("product-image-unavailable");
     imageWrap.append(
-      makeElement(
-        "span",
-        "image-fallback",
-        "Kashmiri Shawl House"
-      )
+      makeElement("span", "image-fallback", "Image unavailable")
     );
   }
 
   if (
-    normalizeCategory(product.category) === "new arrivals" ||
+    getProductCategory(product) === "new arrivals" ||
     product.isNew === true
   ) {
     imageWrap.append(
@@ -155,11 +270,7 @@ function createProductCard(product) {
 
   if (product.description) {
     details.append(
-      makeElement(
-        "p",
-        "product-description",
-        product.description
-      )
+      makeElement("p", "product-description", product.description)
     );
   }
 
@@ -168,13 +279,11 @@ function createProductCard(product) {
   );
 
   const actions = makeElement("div", "product-actions");
-  const orderLink = document.createElement("a");
+  const orderLink = makeElement("a", "btn product-order-btn", "Order on WhatsApp");
 
-  orderLink.className = "btn product-order-btn";
   orderLink.href = createWhatsAppLink(product);
   orderLink.target = "_blank";
   orderLink.rel = "noopener noreferrer";
-  orderLink.textContent = "Order on WhatsApp";
 
   actions.append(orderLink);
   details.append(actions);
@@ -183,14 +292,18 @@ function createProductCard(product) {
   return card;
 }
 
-/* Filter products by collection and search */
+/* Filtering and search */
 function getFilteredProducts() {
   return allProducts.filter(product => {
-    const category = normalizeCategory(product.category);
+    const category = getProductCategory(product);
 
     const matchesCategory =
       activeFilter === "All" ||
-      category === normalizeCategory(activeFilter);
+      (
+        activeFilter === "New Arrivals"
+          ? category === "new arrivals" || product.isNew === true
+          : category === normalizeCategory(activeFilter)
+      );
 
     const searchableText = [
       product.name,
@@ -199,13 +312,10 @@ function getFilteredProducts() {
       product.description
     ].join(" ").toLowerCase();
 
-    const matchesSearch = searchableText.includes(searchTerm);
-
-    return matchesCategory && matchesSearch;
+    return matchesCategory && searchableText.includes(searchTerm);
   });
 }
 
-/* Display matching products */
 function renderProducts() {
   if (!productGrid) return;
 
@@ -219,19 +329,12 @@ function renderProducts() {
 
   if (products.length === 0) {
     productGrid.hidden = true;
-
-    if (emptyProducts) {
-      emptyProducts.hidden = false;
-    }
-
+    if (emptyProducts) emptyProducts.hidden = false;
     return;
   }
 
   productGrid.hidden = false;
-
-  if (emptyProducts) {
-    emptyProducts.hidden = true;
-  }
+  if (emptyProducts) emptyProducts.hidden = true;
 
   const fragment = document.createDocumentFragment();
 
@@ -242,7 +345,6 @@ function renderProducts() {
   productGrid.append(fragment);
 }
 
-/* Show loading/error message */
 function showProductMessage(message) {
   if (!productGrid) return;
 
@@ -253,25 +355,20 @@ function showProductMessage(message) {
   messageBox.append(makeElement("p", "", message));
   productGrid.append(messageBox);
 
-  if (productCount) {
-    productCount.textContent = "Our collection";
-  }
-
-  if (emptyProducts) {
-    emptyProducts.hidden = true;
-  }
+  if (productCount) productCount.textContent = "Our collection";
+  if (emptyProducts) emptyProducts.hidden = true;
 }
 
-/* Load products from Firestore */
+/* Load from Firebase */
 async function loadProducts() {
   showProductMessage("Discovering our collection...");
 
   try {
     const snapshot = await getDocs(collection(db, "Products"));
 
-    allProducts = snapshot.docs.map(documentSnapshot => ({
-      id: documentSnapshot.id,
-      ...documentSnapshot.data()
+    allProducts = snapshot.docs.map(item => ({
+      id: item.id,
+      ...item.data()
     }));
 
     renderProducts();
@@ -283,54 +380,33 @@ async function loadProducts() {
     }
   } catch (error) {
     console.error("Could not load products:", error);
-
     showProductMessage(
       "We could not load our collection right now. Please try again later."
     );
   }
 }
 
-/* Search */
-if (searchInput) {
-  searchInput.addEventListener("input", () => {
-    searchTerm = searchInput.value.trim().toLowerCase();
-    renderProducts();
-  });
-}
+/* Filter button states */
+function selectFilter(filter) {
+  activeFilter = filter;
 
-if (searchForm) {
-  searchForm.addEventListener("submit", event => {
-    event.preventDefault();
-
-    searchTerm = searchInput
-      ? searchInput.value.trim().toLowerCase()
-      : "";
-
-    renderProducts();
-
-    document.getElementById("featured")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
+  if (filtersContainer) {
+    filtersContainer.querySelectorAll("[data-filter]").forEach(button => {
+      const isActive = button.dataset.filter === filter;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
     });
-  });
+  }
+
+  renderProducts();
 }
 
-/* Collection filter buttons */
 if (filtersContainer) {
   filtersContainer.addEventListener("click", event => {
     const button = event.target.closest("[data-filter]");
-
     if (!button) return;
 
-    activeFilter = button.dataset.filter || "All";
-
-    filtersContainer.querySelectorAll("[data-filter]").forEach(filterButton => {
-      const isActive = filterButton === button;
-      filterButton.classList.toggle("active", isActive);
-      filterButton.setAttribute("aria-pressed", String(isActive));
-    });
-
-    renderProducts();
+    selectFilter(button.dataset.filter || "All");
   });
 
   filtersContainer.querySelectorAll("[data-filter]").forEach(button => {
@@ -344,64 +420,58 @@ if (filtersContainer) {
 /* Collection cards */
 document.querySelectorAll("[data-collection-link]").forEach(link => {
   link.addEventListener("click", () => {
-    activeFilter = link.dataset.collectionLink || "All";
+    const requested = link.dataset.collectionLink || "All";
+    const filter = requested === "All Products" ? "All" : requested;
 
     const matchingButton = filtersContainer
       ? Array.from(filtersContainer.querySelectorAll("[data-filter]"))
-          .find(button => button.dataset.filter === activeFilter)
+          .find(button => button.dataset.filter === filter)
       : null;
 
-    if (matchingButton) {
-      matchingButton.click();
-    } else {
-      activeFilter = "All";
-
-      filtersContainer?.querySelectorAll("[data-filter]").forEach(button => {
-        const isActive = button.dataset.filter === "All";
-        button.classList.toggle("active", isActive);
-        button.setAttribute("aria-pressed", String(isActive));
-      });
-
-      renderProducts();
-    }
+    selectFilter(matchingButton ? filter : "All");
   });
 });
 
 /* Footer collection links */
 document.querySelectorAll("[data-footer-filter]").forEach(link => {
   link.addEventListener("click", () => {
-    const requestedFilter = link.dataset.footerFilter || "All";
-
+    const requested = link.dataset.footerFilter || "All";
     const matchingButton = filtersContainer
       ? Array.from(filtersContainer.querySelectorAll("[data-filter]"))
-          .find(button => button.dataset.filter === requestedFilter)
+          .find(button => button.dataset.filter === requested)
       : null;
 
-    if (matchingButton) {
-      matchingButton.click();
-    }
+    if (matchingButton) selectFilter(requested);
   });
 });
 
-/* Reset products button */
+/* Search */
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    searchTerm = searchInput.value.trim().toLowerCase();
+    renderProducts();
+  });
+}
+
+if (searchForm) {
+  searchForm.addEventListener("submit", event => {
+    event.preventDefault();
+    searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : "";
+    renderProducts();
+
+    document.getElementById("featured")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  });
+}
+
+/* Reset */
 if (resetButton) {
   resetButton.addEventListener("click", () => {
-    activeFilter = "All";
     searchTerm = "";
-
-    if (searchInput) {
-      searchInput.value = "";
-    }
-
-    if (filtersContainer) {
-      filtersContainer.querySelectorAll("[data-filter]").forEach(button => {
-        const isActive = button.dataset.filter === "All";
-        button.classList.toggle("active", isActive);
-        button.setAttribute("aria-pressed", String(isActive));
-      });
-    }
-
-    renderProducts();
+    if (searchInput) searchInput.value = "";
+    selectFilter("All");
   });
 }
 
@@ -429,13 +499,12 @@ if (mobileMenuButton && mainNav) {
   });
 }
 
-/* Current year */
+/* Footer year */
 const currentYear = document.getElementById("currentYear");
 
 if (currentYear) {
   currentYear.textContent = new Date().getFullYear();
 }
 
-/* Start website */
+/* Start */
 loadProducts();
-
